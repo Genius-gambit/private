@@ -1,93 +1,57 @@
 #ifndef ENABLE_IF_HPP
 #define ENABLE_IF_HPP
 
+# include <iostream>
+
 namespace ft
 {
-	template <bool Cond, class T = void>
-	struct enable_if
-	{};
+	template <bool, class T>
+	struct enable_if{};
 
 	template <class T>
-	struct enable_if<true, T>
-	{
-		typedef T type;
-	};
-
-	template <class T, T v>
-	struct integral_constant
-	{
-		static const T	value = v;
-		T				value_type;
-		typedef			integral_constant<T, v>;
-	};
-
-	typedef integral_constant<bool, true>	true_type;
-	typedef integral_constant<bool, false>	false_type;
+	struct enable_if<true, T>{typedef T type;};
 
 	template <class T>
-	struct is_integral : public false_type
-	{};
-
-	template <class T>
-	struct is_integral<const T> : public is_integral<T>
-	{};
-
-	template <class T>
-	struct is_integral<volatile const T> : public is_integral<T>
-	{};
-
-	template <class T>
-	struct is_integral<volatile T> : public is_integral<T>
-	{};
+	struct is_integral{static const bool value = false;};
 
 	template <>
-	struct is_integral<char> : public true_type
-	{};
+	struct is_integral<bool>{static const bool value = true;};
 
 	template <>
-	struct is_integral<unsigned char> : public true_type
-	{};
+	struct is_integral<int>{static const bool value = true;};
 
 	template <>
-	struct is_integral<signed char> : public true_type
-	{};
+	struct is_integral<char>{static const bool value = true;};
 
 	template <>
-	struct is_integral<int> : public true_type
-	{};
+	struct is_integral<wchar_t>{static const bool value = true;};
 
 	template <>
-	struct is_integral<long> : public true_type
-	{};
+	struct is_integral<signed char>{static const bool value = true;};
 
 	template <>
-	struct is_integral<unsigned int> : public true_type
-	{};
+	struct is_integral<short>{static const bool value = true;};
 
 	template <>
-	struct is_integral<unsigned long long> : public true_type
-	{};
+	struct is_integral<long>{static const bool value = true;};
 
 	template <>
-	struct is_integral<short> : public true_type
-	{};
+	struct is_integral<long long>{static const bool value = true;};
 
 	template <>
-	struct is_integral<unsigned short> : public true_type
-	{};
+	struct is_integral<unsigned char>{static const bool value = true;};
 
 	template <>
-	struct is_integral<bool> : public true_type
-	{};
+	struct is_integral<unsigned short>{static const bool value = true;};
 
-	template <typename T>
-	void	swap(T &first, T &second)
-	{
-		T tmp = first;
+	template <>
+	struct is_integral<unsigned int>{static const bool value = true;};
 
-		first = second;
-		second = tmp;
-	}
-}
+	template <>
+	struct is_integral<unsigned long>{static const bool value = true;};
+
+	template <>
+	struct is_integral<unsigned long long>{static const bool value = true;};
+};
 
 #endif
