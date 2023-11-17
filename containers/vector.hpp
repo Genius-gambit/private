@@ -102,7 +102,7 @@ namespace ft
 			reverse_iterator	rend() { return (reverse_iterator(_arr - 1)); }
 			const_iterator	rend() const { return (const_reverse_iterator(_arr - 1)); }
 		
-		//! -------------------------------------------- Member Functions -------------------------------------------- !//
+		//! --------------------------------------------- Member Functions --------------------------------------------- !//
 
 			size_type	max_size() const { return (_alloc.max_size()); }
 			

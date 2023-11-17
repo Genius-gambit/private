@@ -30,11 +30,6 @@ namespace ft
 			throw (std::length_error("cannot create ft::vector larger than max_size()"));
 	}
 
-	/*
-	*	@brief : calls an is_valid function which is overloaded with iter_tags
-	*	@note :
-	*		the is_valid function throws std::length_error if first > last
-	*/
 	template <class InputIter>
 	void	range_check(InputIter first, InputIter last)
 	{
