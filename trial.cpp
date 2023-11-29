@@ -190,8 +190,8 @@ void inorder(struct node* trav)
 // driver code
 int main()
 {
-	int n = 7;
-	int a[7] = { 7, 6, 5, 4, 3, 2, 1 };
+	int n = 8;
+	int a[8] = { 7, 6, 5, 12, 4, 3, 2, 1 };
 
 	for (int i = 0; i < n; i++) {
 
@@ -219,6 +219,7 @@ int main()
 
 	printf("Inorder Traversal of Created Tree\n");
 	inorder(root);
+	printf("\n");
 
 	return 0;
 }

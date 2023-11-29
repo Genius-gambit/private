@@ -1,12 +1,10 @@
-#include <vector>
-#include <iterator>
+#include "map.hpp"
 #include <iostream>
 
 int main()
 {
-	std::vector<int>	test;
+	ft::map<int, int>	trial;
 
-	test.insert(test.begin(), -1, 42);
-	for (std::vector<int>::iterator it = test.begin(); it != test.end(); it++)
-		std::cout << *it << " ";
+	trial.insert(ft::pair<int, int>(2, 3));
+	// std::cout << trial.begin().node()->pair.first << std::endl;
 }
