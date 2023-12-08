@@ -4,62 +4,21 @@
 # include <iterator>
 # include <vector>
 # include <cstddef>
+# include "utils/iterator_traits.hpp"
 
 namespace ft
 {
-	//! ----------------------- Iterator tags ------------------------------ !//
-	struct input_iterator_tag {};
-	struct output_iterator_tag {};
-	struct forward_iterator_tag : public input_iterator_tag {};
-	struct bidirectional_iterator_tag : public forward_iterator_tag {};
-	struct random_access_iterator_tag : public bidirectional_iterator_tag {};
-	//! ----------------------- End Iterator tags -------------------------- !//
-
-	template < class iterator >
-	//! ----------------------- Iterator traits -------------------------- !//
-	struct iterator_traits
+	template<class T>
+	class vectorIterator
 	{
-		typedef typename iterator::difference_type		difference_type;
-		typedef typename iterator::value_type			value_type;
-		typedef typename iterator::pointer				pointer;
-		typedef typename iterator::reference			reference;
-		typedef typename iterator::iterator_category	iterator_category;
-	};
-
-	template < class T >
-	struct iterator_traits< T* >
-	{
-		typedef ptrdiff_t								difference_type;
-		typedef T										value_type;
-		typedef T*										pointer;
-		typedef T&										reference;
-		typedef std::random_access_iterator_tag			iterator_category;
-	};
-
-	template < class T >
-	struct iterator_traits< const T* >
-	{
-		typedef ptrdiff_t								difference_type;
-		typedef T										value_type;
-		typedef T*										pointer;
-		typedef T&										reference;
-		typedef std::random_access_iterator_tag			iterator_category;
-	};
-
-	template < class U >
-	class iterator
-	{
-		public:
-
 	//! ----------------------- Iterator Defined Types -------------------------- !//
-			typedef ptrdiff_t							difference_type;
-			typedef U									value_type;
-			typedef U*									pointer;
-			typedef const U*							const_pointer;
-			typedef U&									reference;
-			typedef const U&							const_reference;
-			typedef std::random_access_iterator_tag		iterator_category;
-			typedef iterator<const U>					const_iterator;
+		public:
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type	value_type;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type	difference_type;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::pointer			pointer;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::const_pointer		const_pointer;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			reference;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category	iterator_category;
 
 	//! ----------------------- Iterator Constructors -------------------------- !//
 			iterator() : _it() {}
@@ -108,27 +67,25 @@ namespace ft
 			reference	operator*() const { return (*_it); }
 		private:
 			pointer	_it;
+		//! ----------------------- Iterators Relational Operators -------------------------- !//	
+		template	<class Iter1, class Iter2>
+		bool	operator !=(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() != second.base()); }
+
+		template	<class Iter1, class Iter2>
+		bool	operator >(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() > second.base()); }
+
+		template	<class Iter1, class Iter2>
+		bool	operator ==(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() == second.base()); }
+
+		template	<class Iter1, class Iter2>
+		bool	operator >=(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() >= second.base()); }
+
+		template	<class Iter1, class Iter2>
+		bool	operator <=(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() <= second.base()); }
+
+		template	<class Iter1, class Iter2>
+		bool	operator <(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() < second.base()); }
 	};
-
-	//! ----------------------- Iterators Relational Operators -------------------------- !//
-	
-	template	<class Iter1, class Iter2>
-	bool	operator !=(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() != second.base()); }
-
-	template	<class Iter1, class Iter2>
-	bool	operator >(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() > second.base()); }
-
-	template	<class Iter1, class Iter2>
-	bool	operator ==(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() == second.base()); }
-
-	template	<class Iter1, class Iter2>
-	bool	operator >=(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() >= second.base()); }
-
-	template	<class Iter1, class Iter2>
-	bool	operator <=(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() <= second.base()); }
-
-	template	<class Iter1, class Iter2>
-	bool	operator <(const iterator<Iter1>& first, const iterator<Iter2>& second) { return (first.base() < second.base()); }
 
 	template < class U >
 	class reverse_iterator
@@ -137,13 +94,12 @@ namespace ft
 
 		//! ----------------------- Reverse Iterator Defined Types -------------------------- !//
 			
-			typedef ptrdiff_t							difference_type;
-			typedef U									value_type;
-			typedef U*									pointer;
-			typedef const U*							const_pointer;
-			typedef U&									reference;
-			typedef const U&							const_reference;
-			typedef std::random_access_iterator_tag		iterator_category;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type	value_type;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type	difference_type;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::pointer			pointer;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::const_pointer		const_pointer;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			reference;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category	iterator_category;
 			
 		//! ----------------------- Reverse Iterator Constructors -------------------------- !//
 

@@ -11,10 +11,8 @@
 #include <iomanip>
 #include <memory>
 #include <cstddef>
-#include "vector_iterator.hpp"
-#include "enable_if.hpp"
-#include "algorithm.hpp"
-#include "valid_iterator.hpp"
+#include "iterators/iterator.hpp"
+#include "iterators/reverse_iterator.hpp"
 
 namespace ft
 {
@@ -32,10 +30,10 @@ namespace ft
 			typedef typename allocator_type::const_reference	const_reference;
 			typedef typename allocator_type::const_pointer  	const_pointer;
 			typedef std::size_t									size_type;
-			typedef ft::iterator<T>								iterator;
-			typedef const ft::iterator<T>						const_iterator;
-			typedef ft::reverse_iterator<T>						reverse_iterator;
-			typedef const ft::reverse_iterator<T>				const_reverse_iterator;
+			typedef ft::Iterator<T>								iterator;
+			typedef ft::Iterator<const T>						const_iterator;
+			typedef ft::reverse_Iterator<iterator>						reverse_iterator;
+			typedef const ft::reverse_Iterator<iterator>				const_reverse_iterator;
 
 		//! -------------------------------------------- Constructors & Destructor -------------------------------------------- !//
 

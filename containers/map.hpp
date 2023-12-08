@@ -123,24 +123,37 @@ namespace ft
 			{
 				init_tree();
 			};
-			template <class InputIterator>
-			map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type alloc = allocator_type()) : _alloc(alloc), _comp(comp)
+			iterator begin()
 			{
-				init_tree();
-				insert(first, last);
-			};
-			template <class InputIterator>
-			void	insert(InputIterator first, InputIterator last)
-			{
-				while (first != last)
-				{
-					insert(*first);
-					++first;
-				}
-			};
+				node	n = _root;
+				if (!n->leftNode && n->rightNode)
+					n = n->rightNode;
+				while (n->leftNode)
+					n = n->leftNode;
+				return (iterator(n));
+			}
+			// template <class InputIterator>
+			// map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type alloc = allocator_type()) : _alloc(alloc), _comp(comp)
+			// {
+			// 	init_tree();
+			// 	insert(first, last);
+			// };
+			// template <class InputIterator>
+			// void	insert(InputIterator first, InputIterator last)
+			// {
+			// 	while (first != last)
+			// 	{
+			// 		insert(*first);
+			// 		++first;
+			// 	}
+			// };
 			void insert(const value_type &value)
 			{
-				// iterator	tmp;
+				(void)value;
+				this->_root->pair = value;
+				std::cout << this->_root->pair.first << ", " << this->_root->pair.second << std::endl;
+				iterator	tmp = begin();
+				(void)tmp;
 
 				// if ((tmp = find(value.first)) != end())
 				// 	return (ft::make_pair(tmp, false));
@@ -149,6 +162,8 @@ namespace ft
 			}
 			iterator	insert(iterator position, const value_type &value)
 			{
+				(void)position;
+				(void)value;
 				// iterator	tmp;
 
 				// if (tmp = find(value.first) != end())
